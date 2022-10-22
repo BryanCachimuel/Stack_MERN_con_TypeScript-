@@ -38,10 +38,26 @@ export const obteniendoVideoPorId: RequestHandler = async (req: Request, res: Re
     }
 }  
 
-export const editarVideo: RequestHandler = (req: Request, res: Response) => {
-    res.json('Editar video')
-} 
+export const editarVideo: RequestHandler = async (req: Request, res: Response) => {
+    try {
+        const videoActualizado = await Video.findByIdAndUpdate(req.params.id, req.body, {new: true})
+        if(!videoActualizado){
+            res.status(204).json({ messagge: "El video no se puede Actualizar" })
+        }
+        res.json(videoActualizado)
+    } catch (error) {
+        res.json(error)
+    }
+}
 
-export const eliminarVideos: RequestHandler = (req: Request, res: Response) => {
-    res.json('Eliminar video')
+export const eliminarVideos: RequestHandler = async (req: Request, res: Response) => {
+    try {
+        const videoporEliminar = await Video.findByIdAndDelete(req.params.id)
+        if(!videoporEliminar){
+            res.status(204).json()
+        }
+        return res.status(200).json({ messagge: "Video Eliminado Satisfactoriamente" })
+    } catch (error) {
+        res.json(error)
+    }
 }  
