@@ -24,8 +24,11 @@ const ListaVideos = () => {
        <h1>Lista de Videos</h1>
        {videos.map((video) => {
         return <div key={video._id}>
-            <p>{video.createdAt}</p>
             <p>{video.titulo}</p>
+            <p>{video.descripcion}</p>
+            <p>{video.url}</p>
+            <p>{video.createdAt}</p>
+            <p>{video.updatedAt}</p>
         </div>
        })}  
     </div>
