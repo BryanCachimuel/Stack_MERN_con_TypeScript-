@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ListaVideos from './components/Videos/ListaVideos';
+import CrearVideo from './components/Videos/CrearVideo';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +14,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<ListaVideos/>}/>
+        <Route path='/crear_video' element={<CrearVideo/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
