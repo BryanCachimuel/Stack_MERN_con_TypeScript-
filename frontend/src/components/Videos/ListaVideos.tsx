@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { Video } from '../Interface/VideoInterface'
+import * as videosServicios from '../Services/VideoServicios'
 
 
 
@@ -10,7 +10,7 @@ const ListaVideos = () => {
   const [videos, setVideos] = useState<Video[]>([])
     
   const cargarVideos = async () => {
-    const respuestaVideos = await axios.get('http://localhost:3002/videos')
+    const respuestaVideos = await videosServicios.obteniendoVideos()
     setVideos(respuestaVideos.data)
   }
     
@@ -23,7 +23,7 @@ const ListaVideos = () => {
     <div>
        <h1>Lista de Videos</h1>
        {videos.map((video) => {
-        return <div>
+        return <div key={video._id}>
             <p>{video.createdAt}</p>
             <p>{video.titulo}</p>
         </div>
