@@ -3,10 +3,10 @@
 */
 
 export interface Video{
-    createdAt: string,
+    _id?: string
+    url: string
     descripcion: string,
     titulo: string
-    updatedAt: string
-    url: string
-    _id: string
+    createdAt?: string,
+    updatedAt?: string   
 }

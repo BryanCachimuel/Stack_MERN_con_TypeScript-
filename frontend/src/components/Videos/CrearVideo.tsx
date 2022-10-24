@@ -1,7 +1,20 @@
-import React from "react";
-import {Link} from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Video } from "../Interface/VideoInterface";
+
+type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 const CrearVideo = () => {
+  const [video, setVideo] = useState<Video>({
+    titulo: "",
+    descripcion: "",
+    url: "",
+  });
+
+  const handleInputChange = (e: InputChange) =>{
+    setVideo({...video, [e.target.value]: e.target.value})
+  }
+
   return (
     <div className="row">
       <div className="col-md-4 offset-md-4">
@@ -15,6 +28,7 @@ const CrearVideo = () => {
                   name="titulo"
                   placeholder="Titulo del Video"
                   className="form-control"
+                  onChange={handleInputChange}
                   autoFocus
                 />
               </div>
@@ -24,6 +38,7 @@ const CrearVideo = () => {
                   name="url"
                   placeholder="https://www.youtube.com/"
                   className="form-control"
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="form-group">
@@ -32,11 +47,14 @@ const CrearVideo = () => {
                   rows={3}
                   className="form-control mb-3"
                   placeholder="Escribe una descripción"
+                  onChange={handleInputChange}
                 ></textarea>
               </div>
               <div className="form-group">
                 <button className="btn btn-primary">Crear Video</button>
-                <Link className="btn btn-danger" to={'/'}>Cancelar</Link>
+                <Link className="btn btn-danger" to={"/"}>
+                  Cancelar
+                </Link>
               </div>
             </form>
           </div>
