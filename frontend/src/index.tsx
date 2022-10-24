@@ -4,6 +4,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ListaVideos from './components/Videos/ListaVideos';
 import CrearVideo from './components/Videos/CrearVideo';
+import Navbar from './components/Navbar/Navbar'
+
 import 'bootswatch/dist/zephyr/bootstrap.min.css';
 import './index.css';
 
@@ -13,10 +15,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+    <Navbar/>
+
+      <div className="container">
       <Routes>
         <Route path='/' element={<ListaVideos/>}/>
         <Route path='/crear_video' element={<CrearVideo/>}/>
       </Routes>
+      </div>
     </BrowserRouter>
   </React.StrictMode>
 );
