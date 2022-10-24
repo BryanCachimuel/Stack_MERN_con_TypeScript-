@@ -16,8 +16,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
     <Navbar/>
-
-      <div className="container">
+      <div className="container p-4">
       <Routes>
         <Route path='/' element={<ListaVideos/>}/>
         <Route path='/crear_video' element={<CrearVideo/>}/>
