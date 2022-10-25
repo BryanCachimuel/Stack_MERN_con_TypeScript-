@@ -1,14 +1,19 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Video } from "../Interface/VideoInterface";
 import * as videoServicios from '../Services/VideoServicios'
 import { toast } from 'react-toastify'
 
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
+interface Params {
+  id: string;
+}
+
 const CrearVideo = () => {
 
   const navegar = useNavigate()
+  const params = useParams<Params>()
 
   const estadoInicial = {
     titulo: "",
@@ -69,10 +74,13 @@ const CrearVideo = () => {
                 ></textarea>
               </div>
               <div className="form-group">
-                <button className="btn btn-primary">Crear Video</button>
-                <Link className="btn btn-danger" to={"/"}>
-                  Cancelar
-                </Link>
+                {
+                  params.id ? (
+                  <button className="btn btn-success">Actualizar Video</button>
+                  ):(
+                  <button className="btn btn-primary">Crear Video</button>
+                )}
+                <Link className="btn btn-danger" to={"/"}>Cancelar</Link>
               </div>
             </form>
           </div>

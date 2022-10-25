@@ -23,6 +23,7 @@ root.render(
       <Routes>
         <Route path='/' element={<ListaVideos/>}/>
         <Route path='/crear_video' element={<CrearVideo/>}/>
+        <Route path='/editar/:id' element={<CrearVideo/>}/>
       </Routes>
        <ToastContainer />
       </div>
