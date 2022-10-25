@@ -10,3 +10,7 @@ export const obteniendoVideos = async () => {
 export const crearVideo = async (video:Video) => {
     return await axios.post(`${API}/videos`, video)
 }
+
+export const obtenerVideoId = async (id: string) => {
+    return await axios.get<Video>(`${API}/videos/${id}`)
+}

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Video } from "../Interface/VideoInterface";
 import * as videoServicios from '../Services/VideoServicios'
@@ -6,14 +6,14 @@ import { toast } from 'react-toastify'
 
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
-interface Params {
+/*interface Params {
   id: string;
-}
+}*/
 
 const CrearVideo = () => {
 
   const navegar = useNavigate()
-  const params = useParams<Params>()
+  const params = useParams()
 
   const estadoInicial = {
     titulo: "",
@@ -34,6 +34,15 @@ const CrearVideo = () => {
     setVideo(estadoInicial)
     navegar('/')
   }
+
+  const obtenerVideo = async (id: string) =>{
+    const videoId = await videoServicios.obtenerVideoId(id)
+    console.log(videoId)
+  }
+
+  useEffect(() => {
+    if(params.id) obtenerVideo(params.id)
+  },[])
 
   return (
     <div className="row">
