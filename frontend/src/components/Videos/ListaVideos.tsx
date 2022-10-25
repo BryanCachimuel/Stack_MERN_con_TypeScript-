@@ -11,7 +11,18 @@ const ListaVideos = () => {
     
   const cargarVideos = async () => {
     const respuestaVideos = await videosServicios.obteniendoVideos()
-    setVideos(respuestaVideos.data)
+    
+    // proceso para transformar la fecha de string date
+    const formatoVideos = respuestaVideos.data.map(video => {
+      return{
+        ...video,
+        createdAt: video.createdAt ? new Date(video.createdAt): new Date(),
+        updatedAt: video.updatedAt ? new Date(video.updatedAt): new Date()
+      }
+    })
+    .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+
+    setVideos(formatoVideos)
   }
     
   useEffect(() => {
