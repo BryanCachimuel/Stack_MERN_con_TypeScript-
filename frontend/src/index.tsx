@@ -5,6 +5,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ListaVideos from './components/Videos/ListaVideos';
 import CrearVideo from './components/Videos/CrearVideo';
 import Navbar from './components/Navbar/Navbar'
+// esta es una dependencia para notificaciones
+import {ToastContainer} from 'react-toastify'
 
 import 'bootswatch/dist/zephyr/bootstrap.min.css';
 import './index.css';
@@ -21,6 +23,7 @@ root.render(
         <Route path='/' element={<ListaVideos/>}/>
         <Route path='/crear_video' element={<CrearVideo/>}/>
       </Routes>
+       <ToastContainer />
       </div>
     </BrowserRouter>
   </React.StrictMode>
