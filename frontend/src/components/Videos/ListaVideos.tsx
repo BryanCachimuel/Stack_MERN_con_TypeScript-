@@ -20,10 +20,9 @@ const ListaVideos = () => {
 
 
   return (
-    <div>
-       <h1>Lista de Videos</h1>
+    <div className="row">
        {videos.map((video) => {
-        return <VideoItem video={video}/>
+        return <VideoItem video={video}  key={video._id}/>
        })}  
     </div>
   )

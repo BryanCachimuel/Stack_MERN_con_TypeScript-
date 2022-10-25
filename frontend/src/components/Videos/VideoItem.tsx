@@ -1,21 +1,25 @@
-import React from 'react'
-import { Video } from '../Interface/VideoInterface'
+import React from "react";
+import { Video } from "../Interface/VideoInterface";
+import ReactPlayer from 'react-player'
 
 // se importa la interfaz para poder acceder a los atributos del documento
 interface Props {
-    video: Video
+  video: Video;
 }
 
-const VideoItem = ({video}: Props) => {
+const VideoItem = ({ video }: Props) => {
   return (
-    <div key={video._id}>
-         <h2>{video.titulo}</h2>
-         <p>{video.descripcion}</p>
-         <p>{video.url}</p>
-         <p>{video.createdAt}</p>
-         <p>{video.updatedAt}</p>
+    <div className="col-md-4">
+      <div className="card card-body">
+        <div className="d-flex justify-content-between">
+          <h2>{video.titulo}</h2>
+          <span className="text-danger">x</span>
+        </div>
+        <p>{video.descripcion}</p>
+        <ReactPlayer url={video.url} width='100%' height='100%' /> 
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default VideoItem
+export default VideoItem;
