@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar'
 // esta es una dependencia para notificaciones
 import {ToastContainer} from 'react-toastify'
 
+import 'react-toastify/dist/ReactToastify.css';
 import 'bootswatch/dist/zephyr/bootstrap.min.css';
 import './index.css';
 

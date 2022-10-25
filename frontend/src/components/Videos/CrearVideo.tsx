@@ -1,16 +1,22 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Video } from "../Interface/VideoInterface";
 import * as videoServicios from '../Services/VideoServicios'
+import { toast } from 'react-toastify'
 
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 const CrearVideo = () => {
-  const [video, setVideo] = useState<Video>({
+
+  const navegar = useNavigate()
+
+  const estadoInicial = {
     titulo: "",
     descripcion: "",
     url: "",
-  });
+  }
+
+  const [video, setVideo] = useState<Video>(estadoInicial)
 
   const handleInputChange = (e: InputChange) =>{
     setVideo({ ...video, [e.target.name]: e.target.value })
@@ -18,8 +24,10 @@ const CrearVideo = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const crear = await videoServicios.crearVideo(video)
-    console.log(crear)
+    await videoServicios.crearVideo(video)
+    toast.success('Nuevo Video Agregado')
+    setVideo(estadoInicial)
+    navegar('/')
   }
 
   return (
@@ -36,6 +44,7 @@ const CrearVideo = () => {
                   placeholder="Titulo del Video"
                   className="form-control"
                   onChange={handleInputChange}
+                  value={video.titulo}
                   autoFocus
                 />
               </div>
@@ -46,6 +55,7 @@ const CrearVideo = () => {
                   placeholder="https://www.youtube.com/"
                   className="form-control"
                   onChange={handleInputChange}
+                  value={video.url}
                 />
               </div>
               <div className="form-group">
@@ -55,6 +65,7 @@ const CrearVideo = () => {
                   className="form-control mb-3"
                   placeholder="Escribe una descripción"
                   onChange={handleInputChange}
+                  value={video.descripcion}
                 ></textarea>
               </div>
               <div className="form-group">
