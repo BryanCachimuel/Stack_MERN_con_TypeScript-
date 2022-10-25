@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { Video } from "../Interface/VideoInterface";
+import * as videoServicios from '../Services/VideoServicios'
 
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
@@ -12,7 +13,13 @@ const CrearVideo = () => {
   });
 
   const handleInputChange = (e: InputChange) =>{
-    setVideo({...video, [e.target.value]: e.target.value})
+    setVideo({ ...video, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const crear = await videoServicios.crearVideo(video)
+    console.log(crear)
   }
 
   return (
@@ -21,7 +28,7 @@ const CrearVideo = () => {
         <div className="card">
           <div className="card-body">
             <h3>Nuevo Video</h3>
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <div className="form-group mb-3">
                 <input
                   type="text"
