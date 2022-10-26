@@ -6,14 +6,11 @@ import { toast } from 'react-toastify'
 
 type InputChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
-/*interface Params {
+interface Params {
   id: string;
-}*/
+}
 
 const CrearVideo = () => {
-
-  const navegar = useNavigate()
-  const params = useParams()
 
   const estadoInicial = {
     titulo: "",
@@ -23,26 +20,35 @@ const CrearVideo = () => {
 
   const [video, setVideo] = useState<Video>(estadoInicial)
 
+  const navegar = useNavigate()
+  const params = useParams()
+
   const handleInputChange = (e: InputChange) =>{
     setVideo({ ...video, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await videoServicios.crearVideo(video)
-    toast.success('Nuevo Video Agregado')
-    setVideo(estadoInicial)
+    if(!params.id){
+      await videoServicios.crearVideo(video)
+      toast.success('Nuevo Video Agregado')
+      setVideo(estadoInicial)
+    }else{
+      await videoServicios.actualizarVideo(params.id, video)
+    }
+
     navegar('/')
   }
 
   const obtenerVideo = async (id: string) =>{
     const videoId = await videoServicios.obtenerVideoId(id)
-    console.log(videoId)
+    const { titulo, descripcion, url } = videoId.data
+    setVideo({titulo, descripcion, url})
   }
 
   useEffect(() => {
     if(params.id) obtenerVideo(params.id)
-  },[])
+  },[params.id])
 
   return (
     <div className="row">
