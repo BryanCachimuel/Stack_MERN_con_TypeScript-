@@ -18,3 +18,7 @@ export const obtenerVideoId = async (id: string) => {
 export const actualizarVideo = async (id: string, video: Video) => {
     return await axios.put<Video>(`${API}/videos/${id}`, video)
 }
+
+export const eliminarVideo = async (id: string) => {
+    return await axios.delete<Video>(`${API}/videos/${id}`)
+}
