@@ -21,7 +21,7 @@ const CrearVideo = () => {
   const [video, setVideo] = useState<Video>(estadoInicial)
 
   const navegar = useNavigate()
-  const params = useParams()
+  const {id} = useParams<{id?: string}>()
 
   const handleInputChange = (e: InputChange) =>{
     setVideo({ ...video, [e.target.name]: e.target.value })
@@ -29,12 +29,12 @@ const CrearVideo = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if(!params.id){
+    if(!id){
       await videoServicios.crearVideo(video)
       toast.success('Nuevo Video Agregado')
       setVideo(estadoInicial)
     }else{
-      await videoServicios.actualizarVideo(params.id, video)
+      await videoServicios.actualizarVideo(id, video)
     }
 
     navegar('/')
@@ -47,8 +47,8 @@ const CrearVideo = () => {
   }
 
   useEffect(() => {
-    if(params.id) obtenerVideo(params.id)
-  },[params.id])
+    if(id) obtenerVideo(id)
+  },[id])
 
   return (
     <div className="row">
@@ -90,7 +90,7 @@ const CrearVideo = () => {
               </div>
               <div className="form-group">
                 {
-                  params.id ? (
+                  id ? (
                   <button className="btn btn-success">Actualizar Video</button>
                   ):(
                   <button className="btn btn-primary">Crear Video</button>
